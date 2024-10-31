@@ -4,8 +4,8 @@ import { useDocument } from '@automerge/automerge-repo-react-hooks'
 import { updateText } from '@automerge/automerge/next'
 import * as ar from "@automerge/automerge-repo"
 import * as an from "@automerge/automerge/next"
+import * as a from "@automerge/automerge";
 //import { AutomergeUrl, RawString } from '@automerge/automerge-repo'
-
 
 export interface Property {
   id: an.RawString;
@@ -17,7 +17,6 @@ type ObjectId = string;
 export type Model = {
   objectMap: {[key: string]: Property};
   submodels: ObjectId[];
-  lastObjectId: an.Counter;
 }
 
 
@@ -30,11 +29,10 @@ function App({ docUrl }: { docUrl: ar.AutomergeUrl }) {
       <button type="button" onClick={() => {
         changeDoc(d => {
           console.log("D", d);
-          console.log("d.lastObjectId", d.lastObjectId);
           console.log("d.submodels", d.submodels);
           console.log("d.objectMap", d.objectMap);
           
-          const objectId = d.lastObjectId.increment(1).toString();
+          const objectId = a.uuid();
           console.log("ObjectId", objectId);
 
           d.objectMap[objectId] = {

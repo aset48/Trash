@@ -22,8 +22,7 @@ if (isValidAutomergeUrl(rootDocUrl)) {
 } else {
   handle = repo.create<Model>({ 
     objectMap: {},
-    submodels: [],
-    lastObjectId: new an.Counter()
+    submodels: []
   })
 }
 const docUrl = document.location.hash = handle.url
